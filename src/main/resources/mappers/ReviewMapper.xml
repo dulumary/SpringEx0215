@@ -20,8 +20,55 @@
 		FROM
 			`new_review`
 		WHERE
+			
 			`id` = #{id}
 	</select>
+	
+	<insert id="insertReviewByObject" parameterType="com.marondal.ex.lesson03.model.Review">
+		INSERT INTO `new_review`
+		(
+			`storeId`
+			, `menu`
+			, `userName`
+			, `point`
+			, `review`
+			, `createdAt`
+			, `updatedAt`
+		) VALUE (
+			#{storeId}
+			, #{menu}
+			, #{userName}
+			, #{point}
+			, #{review}
+			, now()
+			, now()
+		)
+		
+			
+	</insert>
+	
+	<insert id="insertReviewByField" parameterType="map">
+		INSERT INTO `new_review`
+		(
+			`storeId`
+			, `menu`
+			, `userName`
+			, `point`
+			, `review`
+			, `createdAt`
+			, `updatedAt`
+		) VALUE (
+			#{storeId}
+			, #{menu}
+			, #{userName}
+			, #{point}
+			, #{review}
+			, now()
+			, now()
+		
+		)
+	
+	</insert>
 	
 
 
