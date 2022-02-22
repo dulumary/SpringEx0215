@@ -19,5 +19,24 @@
 		ORDER BY `id` DESC
 		LIMIT 1
 	</select>
+	
+	<insert id="insertUser" parameterType="map" >
+		INSERT INTO `new_user`
+		(
+			`name`
+			, `yyyymmdd`
+			, `email`
+			, `introduce`
+			, `createdAt`
+			, `updatedAt`
+		) VALUE (
+			#{name}
+			, #{yyyymmdd}
+			, #{email}
+			, #{introduce}
+			, now()
+			, now()
+		)
+	</insert>
 
 </mapper>
