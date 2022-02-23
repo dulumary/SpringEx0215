@@ -6,7 +6,8 @@
   
 <mapper namespace="com.marondal.ex.lesson04.dao.StudentDAO">
 
-	<insert id="insertStudent" parameterType="com.marondal.ex.lesson04.model.Student">
+	<insert id="insertStudent" parameterType="com.marondal.ex.lesson04.model.Student"
+	useGeneratedKeys="true" keyProperty="id">
 	
 		INSERT INTO `new_student`
 		(
