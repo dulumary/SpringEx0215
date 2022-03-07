@@ -14,4 +14,6 @@ public interface UserDAO {
 			@Param("yyyymmdd") String yyyymmdd,
 			@Param("introduce") String introduce,
 			@Param("email") String email);
+	
+	public int selectNameCount(@Param("name") String name);
 }

@@ -19,5 +19,18 @@ public class UserBO {
 	public int addUser(String name, String yyyymmdd, String introduce, String email) {
 		return userDAO.insertUser(name, yyyymmdd, introduce, email);
 	}
+	
+	public boolean isDuplicate(String name) {
+		
+		int count = userDAO.selectNameCount(name);
+		
+//		if(count == 0) {
+//			return false;
+//		} else {
+//			return true;
+//		}
+		
+		return (count != 0);
+	}
 
 }

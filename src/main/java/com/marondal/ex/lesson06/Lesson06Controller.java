@@ -1,5 +1,8 @@
 package com.marondal.ex.lesson06;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +26,8 @@ public class Lesson06Controller {
 		return "lesson06/userInput";
 	}
 	
+	
+	// WEB REST API
 	@PostMapping("/add_user")
 	@ResponseBody
 	public String addUser(
@@ -40,5 +45,31 @@ public class Lesson06Controller {
 		}
 		
 	}
+	
+	// 이름 중복 확인 API
+	@GetMapping("/is_duplicate")
+	@ResponseBody
+	public Map<String, Boolean> isDuplicate(@RequestParam("name") String name) {
+		boolean isDuplicate = userBO.isDuplicate(name);
+		// 중복인경우 
+		// {"is_duplicate":true}
+		// 중복이 아닌경우
+		// {"is_duplicate":false}
+		
+		Map<String, Boolean> resultMap = new HashMap<>();
+//		if(isDuplicate) {
+//			resultMap.put("is_duplicate", true);	
+//		} else {
+//			resultMap.put("is_duplicate", false);
+//		}
+		
+		resultMap.put("is_duplicate", isDuplicate);
+		
+		return resultMap;
+		
+	}
+	
+	
+	
 
 }

@@ -7,14 +7,25 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
+<style>
+	#duplicateText {
+		display:none;
+	}
+	
+	#possibleText {
+		display:none;
+	}
 
+</style>
 
 </head>
 <body>
 
 	<h3>회원정보 추가 </h3>
 <!-- 	<form method="post" action="/lesson06/add_user" id="userForm">   -->
-		<label>이름 : </label> <input type="text" name="name" id="nameInput"> <br>
+		<label>이름 : </label> <input type="text" name="name" id="nameInput"> <button type="button" id="duplicateBtn">중복확인</button> <br>
+		<div id="duplicateText"> <small >중복 되었습니다.</small> </div>
+		<div id="possibleText"> <small>사용가능 합니다.</small> </div> 
 		<label>생년월일 : </label> <input type="text" name="yyyymmdd" id="yyyymmddInput"> <br>
 		<label>자기소개 </label> <br>
 		<textarea name="introduce" rows="5" cols="50" id="introduceInput"></textarea> <br>
@@ -112,6 +123,39 @@
 					error:function() {
 						alert("입력 에러");
 					}
+				});
+				
+			});
+			
+			
+			$("#duplicateBtn").on("click", function(){
+				let name = $("#nameInput").val();
+				
+				if(name == "") {
+					alert("이름을 입력하세요!!");
+					return ;
+				} 
+				
+				$.ajax({
+					type:"get",
+					url:"/lesson06/is_duplicate",
+					data:{"name":name},
+					success:function(data) {
+						// 중복되었습니다, 사용가능합니다. 얼럿을 띄우기
+						$("#duplicateText").hide();
+						$("#possibleText").hide();
+						
+						if(data.is_duplicate) {
+							$("#duplicateText").show();
+						} else {
+							$("#possibleText").show();
+							
+						}
+					}, 
+					error:function() {
+						alert("중복체크 에러");
+					}
+					
 				});
 				
 			});
